@@ -1,0 +1,10 @@
+.standard-button:hover {
+    background-color: white;
+    box-shadow: #fff8 0 0 10px;
+}
+
+.myInput:focus{
+    background-color: rgb(15 23 42 / 0.9);
+    transition: background-color ease-in-out 0.2s;
+}
+
