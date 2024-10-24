@@ -1,6 +1,5 @@
-import {React , useRef, useState} from 'react';
-import { Link } from 'react-router-dom';
-function Login() {
+import {React , useRef } from 'react';
+function Regester() {
 
     const styles = {
         myInput : 'bg-slate-800/55 p-2 text-base rounded-sm outline-none myInput' ,
@@ -12,6 +11,7 @@ function Login() {
         inputContainer : 'flex flex-col text-lg sm:text-xl' ,
     };
 
+    const userNameRef = useRef(null);
     const emailRef = useRef(null);
     const passworldRef = useRef(null);
 
@@ -20,6 +20,7 @@ function Login() {
         e.preventDefault();
         const data = 
         {
+            "userName" : userNameRef.current?.value ,
             "email": emailRef.current?.value ,
             "password": passworldRef.current?.value
         }
@@ -35,9 +36,20 @@ function Login() {
 
                     <div className={`${styles.formInside}`}>
                         <h1 className={`${styles.titleText}`}>
-                            Login Here
+                            Regester Here
                         </h1>
-                        <div className={`${styles.inputContainer} py-5`}>
+                        <div className={`${styles.inputContainer} pt-7`}>
+                            <label className=' py-1.5' htmlFor="userName">Username</label>
+                            <input 
+                            ref={userNameRef} 
+                            type='text' 
+                            name='userName' 
+                            className= {`${styles.myInput} `} 
+                            placeholder='Enter your Username'
+                            />
+                        </div>
+
+                        <div className={`${styles.inputContainer} pt-3`}>
                             <label className=' py-1.5' htmlFor="Email">Email </label>
                             <input 
                             ref={emailRef} 
@@ -48,7 +60,7 @@ function Login() {
                             />
                         </div>
 
-                        <div className={`${styles.inputContainer}`}>
+                        <div className={`${styles.inputContainer} pt-3`}>
                             <label className=' py-1.5' htmlFor="pass">Password </label>
                             <input 
                             ref={passworldRef} 
@@ -70,4 +82,4 @@ function Login() {
      );
 }
 
-export default Login;
+export default Regester;
