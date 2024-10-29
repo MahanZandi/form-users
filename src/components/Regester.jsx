@@ -5,7 +5,7 @@ function Regester() {
         myInput : 'bg-slate-800/55 p-2 text-base rounded-sm outline-none myInput' ,
         myButton : 'bg-slate-100 standard-button transition-all text-black text-xl sm:text-2xl rounded-md p-2 flex justify-center' ,
         buttonContainer : 'flex flex-col pt-10 pb-7' ,
-        formOutside : 'flex flex-col  bg-black/30  px-8  mt-40 sm:mt-32 rounded-xl' ,
+        formOutside : 'flex flex-col  bg-black/30  px-8  mt-20 sm:mt-16 rounded-xl' ,
         formInside : 'flex flex-col w-64 md:w-[20rem] lg:w-[25rem] px-2 py-5 text-slate-100' ,
         titleText : 'flex justify-center text-slate-100 text-2xl sm:text-3xl' ,
         inputContainer : 'flex flex-col text-lg sm:text-xl' ,
@@ -14,6 +14,7 @@ function Regester() {
     const userNameRef = useRef(null);
     const emailRef = useRef(null);
     const passworldRef = useRef(null);
+    const phoneRef = useRef(null);
 
 
     const handeleSubmitForm = (e) => {
@@ -22,7 +23,8 @@ function Regester() {
         {
             "userName" : userNameRef.current?.value ,
             "email": emailRef.current?.value ,
-            "password": passworldRef.current?.value
+            "password": passworldRef.current?.value ,
+            "phone" : phoneRef.current?.value
         }
 
         console.log(data);
@@ -30,7 +32,7 @@ function Regester() {
 
 
     return ( 
-        <div className='text-2xl '>
+        <div>
             <div className=' flex justify-center '>
                 <form onSubmit={handeleSubmitForm} className={`${styles.formOutside}`}>
 
@@ -57,6 +59,17 @@ function Regester() {
                             name='Email' 
                             className= {`${styles.myInput} `} 
                             placeholder='Enter your Email'
+                            />
+                        </div>
+
+                        <div className={`${styles.inputContainer} pt-3`}>
+                            <label className=' py-1.5' htmlFor="Phone">Phone  </label>
+                            <input 
+                            ref={phoneRef} 
+                            type='number' 
+                            name='Phone' 
+                            className= {`${styles.myInput} `} 
+                            placeholder='Enter your Phone number'
                             />
                         </div>
 

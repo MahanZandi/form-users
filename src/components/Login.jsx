@@ -29,7 +29,7 @@ function Login() {
 
 
     return ( 
-        <div className='text-2xl '>
+        <div>
             <div className=' flex justify-center '>
                 <form onSubmit={handeleSubmitForm} className={`${styles.formOutside}`}>
 
