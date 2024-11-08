@@ -3,40 +3,46 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
 
-function User({id , userName , email , handleDelete , handleShowDetails , users}) {
+function User({ id, userName, handleDelete, users }) {
 
     const navigate = useNavigate();
 
-    const styles = {
-        ulStyle : 'gap-5 md:gap-7 lg:gap-10 bg-white flex items-center justify-center p-4 border-b shadow-sm' , 
-        idStyle : 'w-6 sm:w-12 md:w-16 flex' ,
-        userNameStyle : 'w-20 sm:w-40 md:w-52 lg:w-64 flex  justify-center' ,
-        actionContainer : 'w-10 sm:w-20 md:w-40 lg:w-52 pl-20 sm:pl-32 sm:gap-1 flex justify-end' ,
-        userDataBtn : 'bg-green-400 hover:bg-green-500 transition-all duration-75 rounded-l-full sm:rounded-full shadow-md shadow-gray-400 sm:text-xl sm:p-2 text-lg p-1' ,
-        deleteBtn : 'bg-red-400 hover:bg-red-500 transition-all duration-75 rounded-r-full sm:rounded-full shadow-md shadow-gray-400 sm:text-xl sm:p-2 text-lg p-1' ,
-        
-    }
+    const handleShowDetails = (id) => {
+        const user = users.find(user => user.id === id);
+        if (user) {
+            console.log(user);
+            navigate(`/users/data`, { state: { user } });  // هدایت به صفحه users/data با اطلاعات کاربر
+        } else {
+            console.log("User not found");
+        }
+    };
 
-    return ( 
+    const styles = {
+        ulStyle: 'gap-5 md:gap-7 lg:gap-10 bg-white flex items-center justify-center p-4 border-b shadow-sm',
+        idStyle: 'w-6 sm:w-12 md:w-16 flex',
+        userNameStyle: 'w-20 sm:w-40 md:w-52 lg:w-64 flex justify-center',
+        actionContainer: 'w-10 sm:w-20 md:w-40 lg:w-52 pl-20 sm:pl-32 sm:gap-1 flex justify-end',
+        userDataBtn: 'bg-green-400 hover:bg-green-500 transition-all duration-75 rounded-l-full sm:rounded-full shadow-md shadow-gray-400 sm:text-xl sm:p-2 text-lg p-1',
+        deleteBtn: 'bg-red-400 hover:bg-red-500 transition-all duration-75 rounded-r-full sm:rounded-full shadow-md shadow-gray-400 sm:text-xl sm:p-2 text-lg p-1',
+    };
+
+    return (
         <ul className={`${styles.ulStyle}`}>
             <li className={`${styles.idStyle}`}>{id}</li>
             <li className={`${styles.userNameStyle}`}>{userName}</li>
             <li className={`${styles.actionContainer}`}>
-                <button 
-                 className={`${styles.userDataBtn}`}
-                 onClick={() => {
-                     navigate('/users/data' )
-                 }}
-                
-                 ><BiSolidUserDetail /></button>
-                 
-                <button 
-                 className={`${styles.deleteBtn}`}
-                 onClick={() => handleDelete(id)}
-                 ><RiDeleteBin6Line/></button>
+                <button
+                    className={`${styles.userDataBtn}`}
+                    onClick={() => handleShowDetails(id)}  // استفاده از تابع handleShowDetails
+                ><BiSolidUserDetail /></button>
+
+                <button
+                    className={`${styles.deleteBtn}`}
+                    onClick={() => handleDelete(id)}
+                ><RiDeleteBin6Line /></button>
             </li>
         </ul>
-     );
+    );
 }
 
 export default User;

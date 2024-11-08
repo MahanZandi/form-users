@@ -17,6 +17,8 @@ function UsersOption() {
         navigate('/users');
     };
 
+    const loginTime = new Date().toLocaleTimeString("US" , { hour12 : false} )
+
     return ( 
         <div >
             <div className=' flex justify-center '>
@@ -31,7 +33,7 @@ function UsersOption() {
 
                     </div>
                     <div className={`${styles.userText}`}>
-                        OSTADHEMOSO
+                        {`Login at ${loginTime}`}
                     </div>
                 </div>
             </div>

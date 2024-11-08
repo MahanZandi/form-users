@@ -1,6 +1,6 @@
 import  { React } from 'react';
 import { Link } from 'react-router-dom';
-import personImg from '../style/images/personman.png'
+import { useLocation } from 'react-router-dom';
 
 function UserData() {
     const styles = {
@@ -8,11 +8,16 @@ function UserData() {
         boxStyle : 'p-3 grid  w-64 md:w-[20rem] lg:w-[25rem] bg-white rounded-2xl' , 
         backBtn : 'bg-blue-600 hover:bg-blue-700 transition-all text-white text-lg sm:text-xl rounded-xl p-2  flex justify-center items-center' ,
         imgStyle : 'w-20 shadow-xl rounded-full col-span-1 mr-4 mt-4' ,
-        lightTextStyle : 'text-sm sm:text-lg text-gray-500' , 
+        lightTextStyle : 'text-sm sm:text-lg text-gray-500 pt-0.5' , 
         listStyle : 'pl-4 pt-4 text-base sm:text-xl' , 
         insideBox : 'grid-cols-4 grid h-[19rem] text-gray-800'
-    }
+    };
 
+    const location = useLocation(); 
+
+    const user = location.state?.user;
+
+    const personImg = user.avatar;
 
     return ( 
         <div>
@@ -26,22 +31,22 @@ function UserData() {
                                     <ul className={`${styles.listStyle}`}>
                                         <li className='pb-4 flex'>User id : 
                                             <p className={`${styles.lightTextStyle} pl-3`}>
-                                                 1
+                                                 {user.id}
                                             </p>
                                         </li>
-                                        <li className='pb-4'>User Name :
+                                        <li className='pb-4'>first Name :
                                             <p className={`${styles.lightTextStyle}`}>
-                                                mahan
+                                                 {user.first_name}
                                             </p>
                                         </li>
-                                        <li className='pb-4'>Email Adress :
-                                            <p className={`${styles.lightTextStyle}`}>
-                                                mahan@gamau.com
+                                        <li className='pb-4'>last name :
+                                            <p className={`${styles.lightTextStyle} `}>
+                                                {user.last_name}
                                             </p>
                                         </li>
-                                        <li>Phone Number :
+                                        <li className=''>Email Adress :
                                             <p className={`${styles.lightTextStyle}`}>
-                                                0923873387
+                                                 {user.email}
                                             </p>
                                         </li>
                                     </ul>

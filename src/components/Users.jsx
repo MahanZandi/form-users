@@ -38,11 +38,9 @@ function Users() {
         setUsers(users.filter(user => user.id !== id));
       };
 
-      const handleShowDetails = (id) => {
-        return users.find(user => user.id === id); 
-      }
-
-      
+      const handleShowDetails = () => {
+        
+      };
 
     return ( 
         <div className={`${styles.textStyle}`}>
@@ -59,6 +57,7 @@ function Users() {
                             <div >
                                   {users.map((user) => (
                                   <User
+                                    users={users}
                                     key={user.id}
                                     userName={user.first_name}
                                     {...user} 
