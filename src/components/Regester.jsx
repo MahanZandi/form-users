@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import myFetch from '../utils/fetch';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 function Regester() {
 
@@ -17,6 +18,8 @@ function Regester() {
         InviteRegisterText : 'hover:text-blue-400 transition-all duration-75 ' ,
         errorText : 'text-red-500 text-xs sm:text-base pl-1 pt-1'
     }; 
+
+    const [ cookie , setCookie] = useCookies('logged_user');
 
     const navigate = useNavigate()
 
@@ -34,7 +37,8 @@ function Regester() {
         .then(res => res.json())
         .then((res) => {
             console.log(res.token)
-            localStorage.setItem('logged_user' , res.token)
+            // localStorage.setItem('logged_user' , res.token)
+            setCookie('token' , res.token)
             navigate('/users')
         })
         .catch((e) => {

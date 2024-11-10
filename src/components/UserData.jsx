@@ -1,8 +1,10 @@
-import  { React } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import myFetch from '../utils/fetch';
 
 function UserData() {
+
     const styles = {
         textStyle : 'text-sm sm:text-base md:text-md' , 
         boxStyle : 'p-3 grid  w-64 md:w-[20rem] lg:w-[25rem] bg-white rounded-2xl' , 
@@ -13,9 +15,24 @@ function UserData() {
         insideBox : 'grid-cols-4 grid h-[19rem] text-gray-800'
     };
 
-    const location = useLocation(); 
+    const { id } = useParams();
+    const [user, setUser] = useState(null);
 
-    const user = location.state?.user;
+    async function requestData(userId) {
+        try {
+            const response = await myFetch(`https://reqres.in/api/users/${userId}`);
+            const data = await response.json();
+            setUser(data.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    }
+
+    useEffect(() => {
+        requestData(id); 
+    }, [id]);
+
+    if (!user) return <div className='loader'></div>; 
 
     const personImg = user.avatar;
 
@@ -54,7 +71,7 @@ function UserData() {
                                 <img className={`${styles.imgStyle}`} src={personImg} alt="person" />
                             </div>
 
-                            <div className=' h-10'>
+                            <div className='h-10'>
                                 <Link 
                                     className={`${styles.backBtn}`}
                                     to="/Users">

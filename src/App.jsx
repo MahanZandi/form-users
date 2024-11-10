@@ -4,10 +4,12 @@ import Regester from './components/Regester';
 import Login from './components/Login';
 import Users from './components/Users';
 import UserData from './components/UserData';
+import CreateUser from './components/CreateUser';
 import PrivateRoute from './components/PrivateRoute';
 import './style/font.css'
 import './style/style.css';
 import './style/animation.css';
+import { useState } from 'react';
 
 function App() {
 
@@ -17,8 +19,9 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path='users' element={<Navigate replace to="/"/>}/>
-                    <Route path='/users/data' element={<PrivateRoute> <UserData/> </PrivateRoute>}/>
+                    <Route path='/users/:id' element={<PrivateRoute> <UserData/> </PrivateRoute>}/>
                     <Route path='/' element={ <PrivateRoute> <Users/> </PrivateRoute>} />
+                    <Route path='/create-user'element={<PrivateRoute> <CreateUser/> </PrivateRoute>}/>
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/regester' element={<Regester/>}/>
                 </Routes>
