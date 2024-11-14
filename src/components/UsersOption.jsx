@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { useNavigate } from 'react-router-dom';
-import myFetch from '../utils/fetch';
+import { useCookies } from 'react-cookie';
 
 function UsersOption() {
 
@@ -11,11 +11,14 @@ function UsersOption() {
         container : 'w-64 sm:w-[26rem] md:w-[33rem] lg:w-[40rem] rounded-xl p-2 sm:p-4 bg-white mt-2 text-xs sm:txet-sm md:text-base flex'
     };
 
+    const [ cookie , setCookie] = useCookies('token');
+
     const navigate = useNavigate();
 
     const logOut = () => {
         localStorage.removeItem('logged_user'); 
         navigate('/login');
+        // cookie.Date('token')
     };
     //* تابع بالا توکن را حذف میکند و کاربر را ریدایرکت میکند به صفحه لاگین
 

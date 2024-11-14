@@ -9,7 +9,6 @@ import PrivateRoute from './components/PrivateRoute';
 import './style/font.css'
 import './style/style.css';
 import './style/animation.css';
-import { useState } from 'react';
 
 function App() {
 

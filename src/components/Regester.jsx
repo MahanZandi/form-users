@@ -1,9 +1,11 @@
-import {React } from 'react';
+import {React , useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import myFetch from '../utils/fetch';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { BsQuestionSquareFill } from "react-icons/bs";
+import HelpModal from './HelpModal';
+// import { useCookies } from 'react-cookie';
 
 function Regester() {
 
@@ -16,10 +18,26 @@ function Regester() {
         titleText : 'flex justify-center text-slate-100 text-2xl sm:text-3xl' ,
         inputContainer : 'flex flex-col text-lg sm:text-xl ' ,
         InviteRegisterText : 'hover:text-blue-400 transition-all duration-75 ' ,
-        errorText : 'text-red-500 text-xs sm:text-base pl-1 pt-1'
+        errorText : 'text-red-500 text-xs sm:text-base pl-1 pt-1' ,
+        icone : 'text-gray-300 hover:text-white' ,
     }; 
 
-    const [ cookie , setCookie] = useCookies('logged_user');
+    // const [ cookie , setCookie] = useCookies('token');
+
+    const [showModal, setShowModal] = useState(false);
+
+    const dataModal = {
+         data: "Because I'm using API Fake use the email and password below to go to the website. " ,
+         emailPass: "email: eve.holt@reqres.in password: pistol"
+    };
+
+    const handelerShowModal = () =>{
+        setShowModal(true)
+    };
+
+    const handleCloseModal = () => { 
+        setShowModal(false); 
+    };
 
     const navigate = useNavigate()
 
@@ -37,8 +55,8 @@ function Regester() {
         .then(res => res.json())
         .then((res) => {
             console.log(res.token)
-            // localStorage.setItem('logged_user' , res.token)
-            setCookie('token' , res.token)
+            localStorage.setItem('logged_user' , res.token)
+            // setCookie('token' , res.token)
             navigate('/users')
         })
         .catch((e) => {
@@ -53,9 +71,16 @@ function Regester() {
                 <form onSubmit={handleSubmit(onSubmit)} className={`${styles.formOutside}`}>
 
                     <div className={`${styles.formInside}`}>
-                        <h1 className={`${styles.titleText}`}>
+                        <h1 className={`${styles.titleText} gap-2`}>
                             Regester Here
+                            <div className='flex items-center'>
+                                <BsQuestionSquareFill 
+                                    className={`${styles.icone}`}
+                                    onClick={handelerShowModal}
+                                    />
+                            </div>
                         </h1>
+
                         {/* <div className={`${styles.inputContainer} pt-7`}>
                             <label className=' py-1.5' htmlFor="userName">Username</label>
                             <input 
@@ -129,6 +154,14 @@ function Regester() {
                         </div>
                     </div>
                 </form>
+                <HelpModal
+                    show={showModal}
+                    onClose={handleCloseModal}
+                    dataModal={dataModal.data}
+                    emailPass={dataModal.emailPass} 
+                    >
+
+                </HelpModal>
             </div>
         </div>
      );

@@ -36,9 +36,7 @@
   animation: l20 2s infinite linear;
   
 }
-.loader:before {
-  content:"Loading...";
-}
+
 
 @keyframes l20 {
   9.09% {text-shadow: 

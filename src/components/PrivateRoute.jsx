@@ -3,9 +3,9 @@ import { useLocation , Navigate} from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 const PrivateRoute = ({ children }) => {
-  // const isLoggedIn = localStorage.getItem('logged_user') !== null;
-  const cookies = useCookies('token');
-  const isLoggedIn = cookies !== null
+  const isLoggedIn = localStorage.getItem('logged_user') !== null;
+  // const cookies = useCookies('token');
+  // const isLoggedIn = cookies !== null
   const location = useLocation();
 
   return isLoggedIn ? (

@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import {React , useState} from 'react';
 import myFetch from '../utils/fetch';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { BsQuestionSquareFill } from "react-icons/bs";
+import HelpModal from './HelpModal';
+
 
 function CreateUser() {
 
@@ -13,7 +16,23 @@ function CreateUser() {
         formInside : 'flex flex-col w-64 md:w-[20rem] lg:w-[25rem] px-2 py-5 text-slate-100' ,
         titleText : 'flex justify-center text-slate-100 text-2xl sm:text-3xl' ,
         inputContainer : 'flex flex-col text-lg sm:text-xl' ,
-        errorText : 'text-red-500 text-xs sm:text-base pl-1 pt-1'
+        errorText : 'text-red-500 text-xs sm:text-base pl-1 pt-1' ,
+        icone : 'text-gray-300 hover:text-white' ,
+    };
+
+    const [showModal, setShowModal] = useState(false);
+
+    const dataModal = {
+         data: "Because I'm using API Fake use the email and password below to go to the website. " ,
+         emailPass: "name: morpheus job: leader"
+        }
+
+    const handelerShowModal = () =>{
+        setShowModal(true)
+    }
+
+    const handleCloseModal = () => { 
+        setShowModal(false); 
     };
 
     const navigate = useNavigate()
@@ -49,8 +68,14 @@ function CreateUser() {
 
                     <div className={`${styles.formInside}`}>
 
-                        <h1 className={`${styles.titleText}`}>
+                        <h1 className={`${styles.titleText} gap-2`}>
                             Create Here
+                            <div className='flex items-center'>
+                                <BsQuestionSquareFill 
+                                    className={`${styles.icone}`}
+                                    onClick={handelerShowModal}
+                                    />
+                            </div>
                         </h1>
 
                         <div className={`${styles.inputContainer} py-5`}>
@@ -101,6 +126,14 @@ function CreateUser() {
                         </div>
                     </div>
                 </form>
+                <HelpModal
+                    show={showModal}
+                    onClose={handleCloseModal}
+                    dataModal={dataModal.data}
+                    emailPass={dataModal.emailPass} 
+                    >
+
+                </HelpModal>
             </div>
         </div>
      );

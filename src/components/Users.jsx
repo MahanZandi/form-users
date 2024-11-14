@@ -1,10 +1,9 @@
 import {React , useEffect, useState} from 'react';
-import Modal from './Modal';
 import UsersOption from './UsersOption';
 import myFetch from '../utils/fetch';
 import User from './User';
 
-function Users({createdUser}) {
+function Users() {
 
     const styles = {
         idStyle : 'w-6 sm:w-12 md:w-16 flex' ,
@@ -17,9 +16,6 @@ function Users({createdUser}) {
     }
 
     const [users, setUsers] = useState([]);
-
-
-
 
     async function requestData(){
       try {
@@ -45,7 +41,7 @@ function Users({createdUser}) {
             });
             if (response.ok) {
                 console.log(`User with ID ${userId} has been deleted.`);
-              
+
             } else {
                 console.error('Failed to delete user');
             }
@@ -54,12 +50,9 @@ function Users({createdUser}) {
         }
     }
     
-    
-
       // useEffect(()=>{
       //   console.log(users)
       // });
-
 
     return ( 
         <div className={`${styles.textStyle}`}>
@@ -73,14 +66,13 @@ function Users({createdUser}) {
                                 <li className={`${styles.userNameStyle}`}>Username</li>
                                 <li className={`${styles.actionStyle}`}>Action</li>
                             </ul>
-                            <div >
+                            <div>
                                   {users.map((user) => (
                                   <User
                                     users={users}
                                     key={user.id}
                                     userName={user.first_name}
                                     {...user} 
-                                    // handleDelete={handleDelete}\
                                     deleteUser={deleteUser}
                                   />
                                 ))}

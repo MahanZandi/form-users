@@ -30,8 +30,7 @@ const Modal = ({ show, onClose, children , deleteUser , id}) => {
                             No
                     </button>
 
-                </div>
-                
+                </div>              
                     {children}
             </div>
         </div>

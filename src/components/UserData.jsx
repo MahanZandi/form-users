@@ -32,7 +32,7 @@ function UserData() {
         requestData(id); 
     }, [id]);
 
-    if (!user) return <div className='loader'></div>; 
+    if (!user) return <div className='loader'>Loading...</div>; 
 
     const personImg = user.avatar;
 

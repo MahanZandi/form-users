@@ -55,7 +55,12 @@ function User({ id, userName , deleteUser }) {
                     </button>
                 </li>
             </ul>            
-                <Modal id={id} show={showModal} onClose={handleCloseModal} deleteUser={deleteUser}/>
+            <Modal 
+                id={id} 
+                show={showModal} 
+                onClose={handleCloseModal} 
+                deleteUser={deleteUser}
+                />
         </div>
     );
 }
