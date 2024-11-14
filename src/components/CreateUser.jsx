@@ -7,7 +7,6 @@ import HelpModal from './HelpModal';
 
 
 function CreateUser() {
-
     const styles = {
         myInput : 'bg-slate-800/55 p-2 text-base rounded-sm outline-none myInput' ,
         myButton : 'bg-slate-100 standard-button transition-all text-black text-xl sm:text-2xl rounded-md p-2 flex justify-center' ,
