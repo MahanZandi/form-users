@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Modal = ({ show, onClose, children , deleteUser , id}) => {
     if (!show) {
         return null;
-    }
+    };
 
     const styles = {
         deletBtn : 'bg-red-500 hover:bg-red-600 shadow-md p-1.5 sm:w-14 w-12 rounded-lg text-white' ,

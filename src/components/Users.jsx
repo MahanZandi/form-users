@@ -1,4 +1,5 @@
 import {React , useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import UsersOption from './UsersOption';
 import myFetch from '../utils/fetch';
 import User from './User';
@@ -34,6 +35,8 @@ function Users() {
       //   setUsers(users.filter(user => user.id !== id)); //* ایدی کاربری که روی دکمه دلیت کلیک کردیم را پیدا میکند و ان را از ارایه کاربر ها حذف میکند و ارایه جدیدی بدون ان کاربر ایجاد میکند
       // };
 
+      const navigate = useNavigate();
+
       async function deleteUser(userId) {
         try {
             const response = await fetch(`https://reqres.in/api/users/${userId}`, {
@@ -41,6 +44,7 @@ function Users() {
             });
             if (response.ok) {
                 console.log(`User with ID ${userId} has been deleted.`);
+                navigate('/users')
 
             } else {
                 console.error('Failed to delete user');

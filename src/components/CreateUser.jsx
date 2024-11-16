@@ -7,6 +7,7 @@ import HelpModal from './HelpModal';
 
 
 function CreateUser() {
+
     const styles = {
         myInput : 'bg-slate-800/55 p-2 text-base rounded-sm outline-none myInput' ,
         myButton : 'bg-slate-100 standard-button transition-all text-black text-xl sm:text-2xl rounded-md p-2 flex justify-center' ,
@@ -20,6 +21,7 @@ function CreateUser() {
     };
 
     const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const dataModal = {
          data: "Because I'm using API Fake use the email and password below to go to the website. " ,
@@ -43,6 +45,7 @@ function CreateUser() {
       } = useForm();
 
       const onSubmit = (data) => {
+        setLoading(true);
         myFetch('https://reqres.in/api/users', {
             method: 'post',
             body: data
@@ -55,6 +58,9 @@ function CreateUser() {
         .catch((e) => {
             console.log({e})
         })
+        .finally(() => { 
+            setLoading(false); 
+        });
       };
 
     return (
@@ -120,7 +126,7 @@ function CreateUser() {
                                 className={`${styles.myButton}`}
                                 type='submit'
                                 >
-                                Submit
+                                {loading ? (<div>loading...</div>) : (<div>Submit</div>)}
                             </button>
                         </div>
                     </div>
